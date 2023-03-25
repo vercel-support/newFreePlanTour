@@ -10,12 +10,11 @@ const generateAction = async (req, res) => {
    // Run first prompt
    console.log(`API: ${req.body.prompt}`)
 
-   const baseCompletion = await openai.createCompletion({
-      model: 'text-davinci-003',
-      prompt: `${req.body.prompt}`,
-      temperature: 0.8,
-      max_tokens: 3800,
-   })
+  
+   const baseCompletion = await openai.createChatCompletion({
+    model: 'gpt-3.5-turbo',
+    messages: [{ role: 'user', content: `${req.body.prompt}` }],
+  });
 
    const basePromptOutput = baseCompletion.data.choices.pop()
 
